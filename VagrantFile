@@ -1,0 +1,38 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant::Config.run do |config|
+  config.vm.box = "cdh4_dev"
+
+  config.vm.box_url = "http://repo.release.cerner.corp/nexus/content/repositories/vagrant/com/cerner/vagrant/cdh4_rhel62/1.0.0/cdh4_rhel62-1.0.0.box"
+  
+  config.vm.forward_port(10101,10101)
+  config.vm.forward_port(10102,10102)
+  config.vm.forward_port(10201,10201)
+  config.vm.forward_port(11000,11000)
+  config.vm.forward_port(11101,11101)
+  config.vm.forward_port(11102,11102)
+  config.vm.forward_port(14000,14000)
+  config.vm.forward_port(14001,14001)
+  config.vm.forward_port(2181,2181)
+  config.vm.forward_port(50010,50010)
+  config.vm.forward_port(50020,50020)
+  config.vm.forward_port(50030,50030)
+  config.vm.forward_port(50060,50060)
+  config.vm.forward_port(50070,50070)
+  config.vm.forward_port(50075,50075)
+  config.vm.forward_port(50090,50090)
+  config.vm.forward_port(60000,60000)
+  config.vm.forward_port(60010,60010)
+  config.vm.forward_port(60020,60020)
+  config.vm.forward_port(60030,60030)
+  config.vm.forward_port(8002,8002)
+  config.vm.forward_port(8003,8003)
+  config.vm.forward_port(8020,8020)
+  config.vm.forward_port(8021,8021)
+  config.vm.forward_port(8081,8081)
+  config.vm.forward_port(8092,8092)
+  config.vm.forward_port(9290,9290)
+  config.vm.forward_port(8888,8888)
+  config.vm.forward_port(44444,44444)
+end
