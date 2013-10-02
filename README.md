@@ -89,7 +89,7 @@ The following must be accomplished inorder to successfully complete this assignm
 Running the project
 --------------------
 
-In order to run the projects first make sure all the *TODO's* in the code have been completed and all the *Junit tests* pass.
+In order to run the projects first make sure all the **TODO's** in the code have been completed and all the **Junit tests** pass.
 
 The Steps involved in running the different jobs are as follows:
 
