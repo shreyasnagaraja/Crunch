@@ -83,7 +83,7 @@ public class CrunchExample {
 
         // TODO: Write the createdPut to a HBase Table Use ToHBase API of crunch to write to the Table
 
-        // TODO : Run the Pipeline
+        // TODO: Run the Pipeline
 
         pipeline.run();
 

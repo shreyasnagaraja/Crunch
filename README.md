@@ -205,7 +205,6 @@ The output from a mapreduce job will contain several lines. However it should al
 
 It should also contain a link (http://localhost:50060/tasktracker.jsp) to a webui where you can track the status of your job and view the errors.
 
-  
 ## HDFS TO HBase Mapper - Example
 
 * Load the wikipedia data needed for this example onto the HDFS directory.

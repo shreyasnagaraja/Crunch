@@ -7,10 +7,6 @@ import org.apache.hadoop.hbase.client.Put;
 /**
  * This class extends the MapFn class.It Performs a MapFn that creates a Put. This MapFn is used by a PTable which is groupedby
  * keys.
- * 
- * 
- * 
- * 
  */
 public class CreatePutFn extends MapFn<Pair<String, Iterable<String>>, Put> {
     private static final long serialVersionUID = 8881913416626789157L;
