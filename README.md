@@ -7,7 +7,7 @@ Introduction
 The purpose of this project is to help individuals with the following:
 
 * Understanding the different components,configuration and functionality that can be performed inside of the Hadoop MapReduce framework.
-* Writing Map and reduce functions.
+* Writing map and reduce functions.
 * Writing and executing a runnable crunch job that implements a full pipeline.
 
 Prerequisites
@@ -18,6 +18,8 @@ This project assumes the following are already installed:
 * Apache Maven
 * Java
 * Vagrant
+* Virtual Box
+* ruby
 
 Installing Git
 ---------------
@@ -31,6 +33,16 @@ Installing Vagrant
 -------------------
 
 * [Follow the instructions for installation of Vagrant](http://docs.vagrantup.com/v2/installation/index.html)
+
+Installing VirtualBox
+----------------------
+
+* [Download virtual box](https://www.virtualbox.org/wiki/Downloads)
+
+Installing Ruby
+-----------------
+
+* [Follow the instructions for installation of ruby](http://rubyinstaller.org/)
 
 The Data
 ---------
@@ -97,7 +109,7 @@ The Steps involved in running the different jobs are as follows:
 
 Select a directory and download the project from github
 
-git clone http://github.cerner.com/CDH/mapreduce-101.git
+`git clone http://github.cerner.com/CDH/mapreduce-101.git`
 
 ## Building
 
