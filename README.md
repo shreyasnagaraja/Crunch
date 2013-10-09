@@ -169,7 +169,7 @@ The project will be available under the `/vagrant` directory.
 
 * 50070 - NameNode
 
-  Shows information about the namenode as well as the HDFS.It is basically responsible for maintaining the filesystem metadata. [here](http://wiki.apache.org/hadoop/NameNode)
+  A NameNode(http://localhost:50070) is basically responsible for maintaining the filesystem metadata. [here](http://wiki.apache.org/hadoop/NameNode)
    
 Once you have successfully completed your code you can run each of the examples and assignments in your vagrant box.
 
