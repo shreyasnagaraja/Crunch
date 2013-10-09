@@ -261,7 +261,7 @@ http://learnhbase.wordpress.com/2013/03/02/hbase-shell-commands/
 
 The output from a mapreduce job will contain several lines. However it should also contain the end status of your job which should be a SUCCESS for a successful job.
 
-It should also contain a link (http://localhost:50070/jobtracker.jsp) to a webui where you can track the status of your job and view the errors.
+It should also contain a link (http://localhost:50030/jobtracker.jsp) to a webui where you can track the status of your job and view the errors.
 
 ## Assignment-1: Link Reversal
 
