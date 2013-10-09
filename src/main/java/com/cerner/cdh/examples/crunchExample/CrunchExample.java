@@ -5,6 +5,7 @@ import org.apache.crunch.PGroupedTable;
 import org.apache.crunch.PTable;
 import org.apache.crunch.Pipeline;
 import org.apache.crunch.PipelineExecution.Status;
+import org.apache.crunch.PipelineResult;
 import org.apache.hadoop.hbase.client.Put;
 
 /**
@@ -85,11 +86,9 @@ public class CrunchExample {
 
         // TODO: Run the Pipeline
 
-        pipeline.run();
-
-        Status s = pipeline.runAsync().getStatus();
-
-        System.out.println("Pipeline Status :" + s);
+        PipelineResult result = pipeline.run();
+ 
+        System.out.println("Pipeline Status :" + result.status);
 
         if (!pipeline.run().succeeded())
             System.out.println("There's a failure in your crunch job");

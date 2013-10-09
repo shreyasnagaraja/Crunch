@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.cerner.cerner.cdh.examples</groupId>
-    <artifactId>mapreduce-examples</artifactId>
+    <artifactId>mapreduce-101</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
@@ -153,7 +153,7 @@
         </dependency>
         <dependency>
             <groupId>org.apache.crunch</groupId>
-            <artifactId>crunch</artifactId>
+            <artifactId>crunch-core</artifactId>
             <version>${crunchVersion}</version>
         </dependency>
         <dependency>
@@ -253,7 +253,7 @@
         <repository>
             <id>release</id>
             <name>Release repository</name>
-            <url>https://repo.release.cerner.corp/main/repo/</url>
+            <url>http://repo.release.cerner.corp/main/repo/</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>

@@ -12,7 +12,7 @@ The purpose of this project is to help individuals with the following:
 
 Prerequisites
 --------------
-This project assumes the following are already installed:
+This project requires the following to be installed:
 
 * Git
 * Apache Maven
@@ -24,10 +24,16 @@ This project assumes the following are already installed:
 Installing Git
 ---------------
 
+### For Windows
+
 * Download and install a git client
 * Add git bin directory to the windows PATH variable
 
 http://geekswithblogs.net/renso/archive/2009/10/21/how-to-set-the-windows-path-in-windows-7.aspx
+
+### For Linux
+
+https://wiki.ucern.com/display/pophealth/Git+Reference#GitReference-GitInstallation
 
 Installing Vagrant
 -------------------
@@ -47,21 +53,28 @@ Installing Ruby
 The Data
 ---------
 
-Most of the examples in this project run over data extracted from [Wikipedia](http://www.wikipedia.org/). The data is available at http://cernbdatahadoopd03.northamerica.cerner.net:50075/browseDirectory.jsp?dir=%2Fwikidump&namenodeInfoPort=50070&nnaddr=10.162.123.102:8020 as a part of this project.
+Most of the examples in this project run over data extracted from [Wikipedia](http://www.wikipedia.org/). The data is available at the following Namenodes depending on whichever is active
 
-Course of Study
------------------
+i) http://cernbdatahadoop01.northamerica.cerner.net:50070
+ii)http://cernbdatahadoop02.northamerica.cerner.net:50070
+
+# Course of Study
 
 The following is the course of study for this lab
 
-## HDFS To HBase Mapper - Example
+## Assignment-0: HDFS To HBase Mapper 
 
 ### Objective
 
-The main purpose of this example is to help individuals understand the different aspects of a Hadoop MapReduce framework. This example shows how data 
+The main purpose of this example is to help individuals understand the different aspects of Hadoop MapReduce framework. This example shows how data 
 can be imported from HDFS to an HBASE Table.
 
-For this specific example, we import the wikipedia dump lying in HDFS into an HBase table for futher processing on it.
+The following must be accomplished inorder to successfully complete this assignment
+
+* Successfully Build and execute the assignment.
+* Verify the results by scanning the HBase table.
+
+For this specific example, we import the wikipedia dump in HDFS into a HBase table for futher processing on it.
 
 ## Assignment-1: Link Reversal
 
@@ -74,8 +87,8 @@ For this specific assignment, the users can use the HBase table generated above 
 
 The following must be accomplished inorder to successfully complete this assignment
 
-* Write the Map and reduce function by following the TODO's commented out in the code.
-* Refer the Junits for help and ensure that it passes on successful completion of code.
+* Write the map and reduce function by following the TODO's commented out in the code.
+* Refer the Junits(LinkReversalMapperTest and LinkReversalReducerTest) for help and ensure that it passes on successful completion of code.
 * Successfully Build and execute the assignment.
 * Verify the results by scanning the table.
 
@@ -94,7 +107,7 @@ The basic idea behind the Crunch Assignment is to create a runnable crunch job t
 The following must be accomplished inorder to successfully complete this assignment
 
 * Follow the different TODO's commented out in the code to complete the assignment.
-* Refer the Junits for help and ensure that all the junits pass on successful completion of code.
+* Refer the Junits(CreatePutFnTest and StringSplitFunctionTest) for help and ensure that all the junits pass on successful completion of code.
 * Successfully Build and execute the job.
 * Verify the results by scanning the table
 
@@ -105,7 +118,7 @@ In order to run the projects first make sure all the **TODO's** in the code have
 
 The Steps involved in running the different jobs are as follows:
 
-## Obtain Clone
+## Clone the Project
 
 Select a directory and download the project from github
 
@@ -117,11 +130,11 @@ The project is configured to be easily built using Maven version 3.0.4.
 
 `mvn clean package`
 
-The jar generated in the *target/* folder (e.g. ~/target/mapreduce-examples-1.0-SNAPSHOT.jar) can then be copied to a Hadoop node for execution of the jobs.
+The jar generated in the *target/* folder (e.g. ~/target/mapreduce-101-1.0-SNAPSHOT.jar) can then be copied to a Hadoop node for execution of the jobs.
 
 ## Acquire Vagrant Box
 
-The VagrantFile in this repository has all of the connection information needed to download, import and start the vagrant box. The Vagrant file is large so it is best to do it on a Cerner connection.
+The VagrantFile in this repository has all of the connection information needed to download, import and start the vagrant box. The operation done using the Vagrant file is large, so it is best to do it on a Cerner connection.
 
 On the command line navigate into the clone directory and execute:
 
@@ -135,8 +148,29 @@ Once the box has started successfully you should be able to access the environme
 
 Get sudo access by doing a `sudo su -` once your inside the box.
 
-The project will be available under the `/Vagrant` directory.
+The project will be available under the `/vagrant` directory.
 
+### Ports to remember
+
+* 50030 - JobTracker
+
+  The jobtracker‘s UI (http://localhost:50030) is commonly used to look at running jobs, and, especially, to find the causes of failed jobs.
+  More Information on the JobTracker can be found [here](http://wiki.apache.org/hadoop/JobTracker)
+
+* 50060 - TaskTracker
+ 
+  A TaskTracker (http://localhost:50060) is a node in the cluster that accepts tasks. The Tasktrackers UI shows the running tasks.More Information
+  on the TastTracker can be found [here](http://wiki.apache.org/hadoop/TaskTracker)
+
+* 60000 - HMaster
+
+  The HBase Master server is responsible for monitoring all RegionServer instances in the cluster, and is the interface for all metadata changes.
+  More information on HMaster and Region servers can be found [here](http://hbase.apache.org/book/master.html) 
+
+* 50070 - NameNode
+
+  Shows information about the namenode as well as the HDFS.It is basically responsible for maintaining the filesystem metadata. [here](http://wiki.apache.org/hadoop/NameNode)
+   
 Once you have successfully completed your code you can run each of the examples and assignments in your vagrant box.
 
 ## Loading Data to HDFS
@@ -163,21 +197,13 @@ You can verify if the input data is successfully copied by going to
 
 Perform the following steps to create a HBase Table
 
-* Download and install Jruby
+* Run the createTable script with HBase Shell
 
-`curl -O http://repo1.maven.org/maven2/org/jruby/jruby-complete/1.7.0/jruby-complete-1.7.0.jar`
-
-* Set the class Path
-
-`export CLASSPATH=` java -jar jruby-complete-1.7.0.jar -e "puts Dir.glob('{.,build,lib}/*.jar').join(':')" `
-
-* Now run the createTable script with HBase
-
-`HBase org.jruby.Main createTable.rb` 
+`HBase shell createTable.rb` 
 
 This will create 2 tables `WIKIDUMP` and `crunchExample` having family name "RAW".
 
-* To see the table structure do the following:
+* To see the list of tables created do the following:
 
 On the Hadoop node execute:
 
@@ -185,11 +211,31 @@ On the Hadoop node execute:
 
 Then using the simple
 
+`list`
+
+This will list all the HBase tables.
+
+(NOTE: You will see a third table TEST_TABLE which is created as a part of vagrant file. This can be ignored).
+
+* To see the table structure do the following:
+
 `describe '<hbase table name>'`
 
 This will display a description of the named table.
 
-## Scanning The Table 
+## HDFS TO HBase Mapper - Example
+
+* Load the wikipedia data needed for this example onto the HDFS directory.
+
+* Make sure a HBase table exists where you wish to run this example to store the final output.
+
+For example if the inputs have been loaded onto the "/wikidump/links" on HDFS and there exists a HBase Table WIKIDUMP, the command to run the example would be of the following form:
+
+`hadoop jar mapreduce-examples-1.0-SNAPSHOT.jar com.cerner.cdh.examples.HDFSToHBaseMain /wikidump/titles-sorted.txt /wikidump/links-simple-sorted.txt WIKIDUMP`
+
+* The results can be seen by doing a scan of the resulting HBase table "WIKIDUMP".
+
+### Scanning The Table 
 
 On the Hadoop node execute:
 
@@ -215,19 +261,7 @@ http://learnhbase.wordpress.com/2013/03/02/hbase-shell-commands/
 
 The output from a mapreduce job will contain several lines. However it should also contain the end status of your job which should be a SUCCESS for a successful job.
 
-It should also contain a link (http://localhost:50060/tasktracker.jsp) to a webui where you can track the status of your job and view the errors.
-
-## HDFS TO HBase Mapper - Example
-
-* Load the wikipedia data needed for this example onto the HDFS directory.
-
-* Make sure a HBase table exists where you wish to run this example to store the final output.
-
-For example if the inputs have been loaded onto the "/wikidump/links" on HDFS and there exists a HBase Table WIKIDUMP, the command to run the example would be of the following form:
-
-`hadoop jar mapreduce-examples-1.0-SNAPSHOT.jar com.cerner.cdh.examples.HDFSToHBaseMain /wikidump/links/titles-sorted.txt /wikidump/links/links-simple-sorted.txt WIKIDUMP`
-
-* The results can be seen by doing a scan of the resulting HBase table "WIKIDUMP".
+It should also contain a link (http://localhost:50070/jobtracker.jsp) to a webui where you can track the status of your job and view the errors.
 
 ## Assignment-1: Link Reversal
 
@@ -257,7 +291,7 @@ So, in this case it would be:
 
 For example if the inputs have been loaded onto the "/wikidump/links" on HDFS and there exists a HBase Table crunchExample, the command to run the example would be of the following form:
 
-`hadoop jar mapreduce-examples-1.0-SNAPSHOT.jar com.cerner.cdh.examples.CrunchExample /wikidump/links/titles-sorted.txt /wikidump/links/links-simple-sorted.txt crunchExample`
+`hadoop jar mapreduce-examples-1.0-SNAPSHOT.jar com.cerner.cdh.examples.CrunchExample /wikidump/titles-sorted.txt /wikidump/links-simple-sorted.txt crunchExample`
 
 * The results can be seen by doing a scan of the resulting HBase table "crunchExample". 
 
