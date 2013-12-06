@@ -55,8 +55,8 @@ The Data
 
 Most of the examples in this project run over data extracted from [Wikipedia](http://www.wikipedia.org/). The data is available at the following Namenodes depending on whichever is active
 
-i) http://cernbdatahadoop01.northamerica.cerner.net:50070
-ii)http://cernbdatahadoop02.northamerica.cerner.net:50070
+i) http://cernbdatahadoopd01.northamerica.cerner.net:50070
+ii)http://cernbdatahadoopd02.northamerica.cerner.net:50070
 
 # Course of Study
 
@@ -185,9 +185,9 @@ The hadoop distributed copy tool can be used to copy the data we need from the H
 
 `hadoop distcp hdfs://cernbdatahadoopd01.northamerica.cerner.net:8020/wikidump/links hdfs://0.0.0.0:8020/wikidump`
 
-Make sure the source namenode is an active node . You can do this by going to `http://cernbdatahadoop01.northamerica.cerner.net:50070`. If it is in standby mode use 
+Make sure the source namenode is an active node . You can do this by going to `http://cernbdatahadoopd01.northamerica.cerner.net:50070`. If it is in standby mode use 
 
-`hdfs://cernbdatahadoop02.northamerica.cerner.net:8020/wikidump/links` as your source.
+`hdfs://cernbdatahadoopd02.northamerica.cerner.net:8020/wikidump/links` as your source.
 
 You can verify if the input data is successfully copied by going to  
 
