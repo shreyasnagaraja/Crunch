@@ -55,8 +55,8 @@ The Data
 
 Most of the examples in this project run over data extracted from [Wikipedia](http://www.wikipedia.org/). The data is available at the following Namenodes depending on whichever is active
 
-i) http://cernbdatahadoopd01.northamerica.cerner.net:50070
-ii)http://cernbdatahadoopd02.northamerica.cerner.net:50070
+i) http://bdatadevhadoopmstr01.northamerica.cerner.net:50070
+ii)http://bdatadevhadoopmstr02.northamerica.cerner.net:50070
 
 # Course of Study
 
@@ -183,11 +183,11 @@ The following steps are to be followed to load the input data to HDFS
 
 The hadoop distributed copy tool can be used to copy the data we need from the HDFS in the source cluster to our HDFS.The following command can be used to perform that function:
 
-`hadoop distcp hdfs://cernbdatahadoopd01.northamerica.cerner.net:8020/wikidump/links hdfs://0.0.0.0:8020/wikidump`
+`hadoop distcp hdfs://bdatadevhadoopmstr01.northamerica.cerner.net:8020/wikidump/links hdfs://0.0.0.0:8020/wikidump`
 
-Make sure the source namenode is an active node . You can do this by going to `http://cernbdatahadoopd01.northamerica.cerner.net:50070`. If it is in standby mode use 
+Make sure the source namenode is an active node . You can do this by going to `http://bdatadevhadoopmstr01.northamerica.cerner.net:50070`. If it is in standby mode use 
 
-`hdfs://cernbdatahadoopd02.northamerica.cerner.net:8020/wikidump/links` as your source.
+`hdfs://bdatadevhadoopmstr02.northamerica.cerner.net:8020/wikidump/links` as your source.
 
 You can verify if the input data is successfully copied by going to  
 
