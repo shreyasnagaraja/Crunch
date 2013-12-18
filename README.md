@@ -183,6 +183,12 @@ For example if the inputs have been loaded onto the "/wikidump/links" on HDFS an
 
 `hadoop jar mapreduce-examples-1.0-SNAPSHOT.jar com.cerner.cdh.examples.HDFSToHBaseMain /wikidump/titles-sorted.txt /wikidump/links-simple-sorted.txt WIKIDUMP`
 
+#### Output
+
+The output from a mapreduce job will contain several lines. However it should also contain the end status of your job which should be a SUCCESS for a successful job.
+
+It should also contain a link (http://localhost:50030/jobtracker.jsp) to a webui where you can track the status of your job and view the errors.
+
 * The results can be seen by doing a scan of the resulting HBase table "WIKIDUMP".
 
 
@@ -201,12 +207,6 @@ or to follow the example above:
 `scan 'WIKIDUMP'`
 
 This will scan the whole table and show you the contents of each row.
-
-#### OUTPUT
-
-The output from a mapreduce job will contain several lines. However it should also contain the end status of your job which should be a SUCCESS for a successful job.
-
-It should also contain a link (http://localhost:50030/jobtracker.jsp) to a webui where you can track the status of your job and view the errors.
 
 
 ### 2-Link Reversal
@@ -320,9 +320,7 @@ ii) http://bdatadevhadoopmstr02.northamerica.cerner.net:50070
   A TaskTracker (http://localhost:50060) is a node in the cluster that accepts tasks. The Tasktrackers UI shows the running tasks.More Information
   on the TastTracker can be found [here](http://wiki.apache.org/hadoop/TaskTracker)
 
-* 60010 - Web UI 
-
-* 60000 - HMaster
+* 60010 - HBase Master WebUI 
 
   The HBase Master server is responsible for monitoring all RegionServer instances in the cluster, and is the interface for all metadata changes.
   More information on HMaster and Region servers can be found [here](http://hbase.apache.org/book/master.html) 
