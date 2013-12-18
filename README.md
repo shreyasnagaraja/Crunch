@@ -88,12 +88,6 @@ https://wiki.ucern.com/display/pophealth/Git+Reference#GitReference-GitInstallat
 * [Follow the instructions for installation of Vagrant](http://docs.vagrantup.com/v2/installation/index.html)
 
 
-
-### Ruby
-
-* [Follow the instructions for installation of ruby](http://rubyinstaller.org/)
-
-
 ## Environment Setup
 
 ### Clone the Project
