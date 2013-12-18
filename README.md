@@ -183,8 +183,6 @@ For example if the inputs have been loaded onto the "/wikidump/links" on HDFS an
 
 `hadoop jar mapreduce-examples-1.0-SNAPSHOT.jar com.cerner.cdh.examples.HDFSToHBaseMain /wikidump/titles-sorted.txt /wikidump/links-simple-sorted.txt WIKIDUMP`
 
-#### Output
-
 The output from a mapreduce job will contain several lines. However it should also contain the end status of your job which should be a SUCCESS for a successful job.
 
 It should also contain a link (http://localhost:50030/jobtracker.jsp) to a webui where you can track the status of your job and view the errors.
