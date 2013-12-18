@@ -318,7 +318,10 @@ HDFS directory to the local directory can all be found in the following link:
  `http://hadoop.apache.org/docs/r2.0.3-alpha/hadoop-project-dist/hadoop-common/CommandsManual.html`
 
 
+Presentation
+---------------
 
+The presentation to accompany this lab is available [here](https://docs.google.com/presentation/d/1JHmELsppdqb4BaaHUzle3lVF_HouB4CE5NvjYBX64D0/edit?usp=sharing).
 
 
 
