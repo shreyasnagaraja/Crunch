@@ -59,7 +59,6 @@ This project requires the following to be installed:
 * Java
 * Vagrant
 * Virtual Box
-* Ruby
 
 
 
