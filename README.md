@@ -121,6 +121,18 @@ Once your inside the box, the project will be available under the `/vagrant` dir
 
 ### 1-HDFS To HBase Mapper
 
+#### Find Active Hadoop Namenode 
+
+
+If `http://bdatadevhadoopmstr01.northamerica.cerner.net:50070` is active 
+
+then **source_hostname** =  bdatadevhadoopmstr01
+
+Otherwise, `http://bdatadevhadoopmstr02.northamerica.cerner.net:50070` should be active
+
+and **source_hostname** = bdatadevhadoopmstr02
+
+
 
 #### Load Data to HDFS   
 
@@ -129,16 +141,10 @@ Once your inside the box, the project will be available under the `/vagrant` dir
 `hadoop fs -mkdir wikidump`
 
 
-* Use the Hadoop distributed copy tool to copy the data we need from the HDFS in the source cluster to our HDFS:
+* Use the Hadoop distributed copy tool to copy the data we need from the HDFS in the source cluster, using the active **source_hostname** defined above, to our HDFS:
 
-`hadoop distcp hdfs://bdatadevhadoopmstr01.northamerica.cerner.net:8020/wikidump/links hdfs://0.0.0.0:8020/wikidump`
+`hadoop distcp hdfs://<source_hostname>.northamerica.cerner.net:8020/wikidump/links hdfs://0.0.0.0:8020/wikidump`
 
-
-* Confirm the source namenode is an active node by following:
-
-`http://bdatadevhadoopmstr01.northamerica.cerner.net:50070`. 
-
-_If it is in standby mode use `hdfs://bdatadevhadoopmstr02.northamerica.cerner.net:8020/wikidump/links` as your source._
 
 
 * Confirm input data is successfully copied by following: 
@@ -329,4 +335,3 @@ ii) http://bdatadevhadoopmstr02.northamerica.cerner.net:50070
 ## Presentation
 
 The presentation to accompany this lab is available [here](https://docs.google.com/presentation/d/1JHmELsppdqb4BaaHUzle3lVF_HouB4CE5NvjYBX64D0/edit?usp=sharing).
- 
