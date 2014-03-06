@@ -4,3 +4,7 @@ target/
 .classpath
 .project
 .settings/
+hadoop/target/
+hadoop/.settings/
+hadoop/.classpath
+hadoop/.project
