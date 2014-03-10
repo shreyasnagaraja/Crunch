@@ -48,7 +48,23 @@ Completing the labs is not necessary but participants can feel free to do so if 
 
 ### Device Setup
 
-TODO indicate which VM to download and then use.
+In order to complete either lab the following software must be installed,
+
+ * [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
+
+Once the software has been installed download the following [file](http://repo.release.cerner.corp/nexus/content/repositories/vagrant/com/cerner/virtualbox/cloudera-training-vm-4.2.1/1.0.0/cloudera-training-vm-4.2.1-1.0.0-virtualbox.zip).
+
+Once the file has finished downloading,
+
+ * Unzip the archive. Note that on Windows machines you may need to use 7-zip or WinZip, due to a bug in Windows' built-in unzip program.
+ * Launch VirtualBox
+ * Create a new machine. Specify that it's a Linux -- RedHat 64-bit machine
+ * Allocate at least 1024MB of RAM to the machine (more is better)
+ * Specify that you'll use an existing virtual hard drive file, and navigate to the Cloudera-Training-VM-4.2.1.p.vmdk file which you unzipped above
+
+You should now be able to create and launch the virtual machine.
+
+**NOTE** : It will take several minutes to start up the first time. Subsequent startups will be much faster.
 
 ## Agenda
 
