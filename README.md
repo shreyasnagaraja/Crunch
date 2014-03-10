@@ -71,4 +71,4 @@ You should now be able to create and launch the virtual machine.
 * Hadoop & MapReduce Refresher presentation
 * [Hadoop & MapReduce Refresher lab](hadoop/README.md)
 * Introduction to Processing with Crunch
-* Crunch Processing Lab
+* [Crunch Processing Lab](crunch/README.md)
