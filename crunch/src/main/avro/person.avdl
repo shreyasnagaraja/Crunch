@@ -1,0 +1,42 @@
+@namespace("com.cerner.training")
+ protocol PersonProtocol {
+
+     /**
+     * Record that represents a person and the friends they have
+     */
+     record Person{
+     
+         /**
+         * The name (or unique identifier) of a person
+         */
+         string name;
+         
+         /**
+         * An array containing the names of all the friends of this person
+         */
+         array<string> friends;
+     }
+     
+     /**
+     * Record that represents a pair of people and the friends they have in common
+     */
+     record PersonPair {
+     
+         /**
+         * The name (or unique identifier) of person 1
+         */
+         string personName1;
+     
+         /**
+         * The name (or unique identifier) of person 2
+         */
+         string personName2;
+         
+         /**
+         * An array containing the names of all the friends that person 1 and person 2 have in common
+         */
+         array<string> commonFriends;
+     
+     }
+
+ }
