@@ -21,6 +21,7 @@ import org.apache.crunch.Source;
 import org.apache.crunch.impl.mr.MRPipeline;
 import org.apache.crunch.io.From;
 import org.apache.crunch.io.To;
+import org.apache.crunch.types.PType;
 import org.apache.crunch.types.avro.Avros;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
@@ -91,33 +92,33 @@ public class CommonFriendsPipeline extends Configured implements Tool {
             }
         }
 
-        // Build our pipeline from the MRPipeline object
-        Pipeline pipeline = new MRPipeline(CommonFriendsPipeline.class, conf);
+        // Here is a link to the crunch javadoc you should be using, http://crunch.apache.org/apidocs/0.8.2/
 
-        // Build a source for from out input path which should be composed of Person avro records
-        Source<Person> source = From.avroFile(inputPath, Person.class);
+        // Build our pipeline
+        Pipeline pipeline = null;
 
-        // Read in the people from the file
-        PCollection<Person> people = pipeline.read(source);
+        // TODO Read the data from the given inputPath. You should use the From crunch class
+        // (http://crunch.apache.org/apidocs/0.8.2/org/apache/crunch/io/From.html) for the source you will need. Keep in mind the
+        // inputPath is a path to an avro file of Person objects.
 
-        // Build a PTable from the list of people where the key is a String composed of two Person objects that are friends
-        PTable<Pair<String, String>, Person> peopleTable = people.parallelDo(
-                "Transform Person objects to a table of friend names and Person object key/values", new PeopleToFriends(),
-                Avros.tableOf(Avros.pairs(Avros.strings(), Avros.strings()), Avros.records(Person.class)));
+        // TODO Add the necessary logic to process all of our data
 
-        // Group the values by key so that we collect each pair of Person objects that are friends
-        PGroupedTable<Pair<String, String>, Person> groupedPeopleTable = peopleTable.groupByKey();
+        // NOTE: Any DoFns/MapFns/etc should be written as their own class or do not use anonymous inner classes. This makes them
+        // easier to unit test and you don't have to worry about the driver class implementing serializable. For more
+        // information read this (http://crunch.apache.org/user-guide.html#dovsmap)
 
-        // Compute the common friends between the two Person objects that are friends and output this to a PersonPair object
-        PCollection<PersonPair> pairs = groupedPeopleTable.parallelDo(
-                "Calculate the common friends from our pair of Person objects", new ComputeCommonFriends(),
-                Avros.records(PersonPair.class));
+        // NOTE: For any PTypes or PTableTypes use the Avros crunch class
+        // (http://crunch.apache.org/apidocs/0.8.2/org/apache/crunch/types/avro/Avros.html). You can even build PTypes for avro
+        // records like this,
+        PType<Person> personPType = Avros.records(Person.class);
+        PType<PersonPair> personPairPType = Avros.records(PersonPair.class);
 
-        // Write these PersonPair objects to an avro file in our output directory
-        pipeline.write(pairs, To.avroFile(outputDirectory));
+        // TODO Write the data to the outputDirectory. Take a look at the To crunch class
+        // (http://crunch.apache.org/apidocs/0.8.2/org/apache/crunch/io/To.html) for the target you will need. Keep in mind we
+        // should be writing out an avro file made of PersonPair objects
 
         // Signal to the pipeline we are done planning and should begin running the pipeline
-        PipelineResult result = pipeline.done();
+        PipelineResult result = null;
 
         // Verify the pipeline was successful
         if (!result.succeeded()) {

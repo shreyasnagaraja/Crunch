@@ -11,17 +11,6 @@ import org.apache.avro.generic.GenericDatumReader;
 import org.apache.avro.generic.GenericRecord;
 import org.apache.avro.io.DatumReader;
 import org.apache.avro.mapred.FsInput;
-import org.apache.crunch.PCollection;
-import org.apache.crunch.PGroupedTable;
-import org.apache.crunch.PTable;
-import org.apache.crunch.Pair;
-import org.apache.crunch.Pipeline;
-import org.apache.crunch.PipelineResult;
-import org.apache.crunch.Source;
-import org.apache.crunch.impl.mr.MRPipeline;
-import org.apache.crunch.io.From;
-import org.apache.crunch.io.To;
-import org.apache.crunch.types.avro.Avros;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.FileStatus;
@@ -32,7 +21,6 @@ import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
 import com.cerner.training.Person;
-import com.cerner.training.crunch.PeopleToFriends;
 
 /**
  * This is the class responsible for building and running the Crunch pipeline used to calculate recommended friends between
@@ -90,50 +78,8 @@ public class FriendRecommendationPipeline extends Configured implements Tool {
                 return 1;
             }
         }
-
-        // Build our pipeline from the MRPipeline object
-        Pipeline pipeline = new MRPipeline(FriendRecommendationPipeline.class, conf);
-
-        // Build a source from our input path which should be composed of Person avro records
-        Source<Person> source = From.avroFile(inputPath, Person.class);
-
-        // Read in the people from the file
-        PCollection<Person> people = pipeline.read(source);
-
-        // Build a PTable from the list of people where the key is a String composed of two Person objects that are friends
-        PTable<Pair<String, String>, Person> peopleTable = people.parallelDo(
-                "Transform Person objects to a table of friend names and Person object key/values", new PeopleToFriends(),
-                Avros.tableOf(Avros.pairs(Avros.strings(), Avros.strings()), Avros.records(Person.class)));
-
-        // Group the values by key so that we collect each pair of Person objects that are friends
-        PGroupedTable<Pair<String, String>, Person> groupedPeopleTable = peopleTable.groupByKey();
-
-        // Compute the raw recommendations for each pair of friends
-        PTable<String, Person> rawRecommendedFriends = groupedPeopleTable.parallelDo(
-                "Calculate the recommendation for each friend pair", new FriendsToRawRecommendations(),
-                Avros.tableOf(Avros.strings(), Avros.records(Person.class)));
-
-        // Here we do a second group by key since the table of raw recommended friends can produce 0-many recommendations for a
-        // single person, each as their own key/value. So here we group them together so we can combine them
-        PCollection<Person> recommendedFriends = rawRecommendedFriends.groupByKey().parallelDo(
-                "Combine all the recommendations for each unique person", new RawRecommendationsToRecommendations(),
-                Avros.records(Person.class));
-
-        // Write these Person objects to an avro file in our output directory
-        pipeline.write(recommendedFriends, To.avroFile(outputDirectory));
-
-        // Signal to the pipeline we are done planning
-        PipelineResult result = pipeline.done();
-
-        // Verify the pipeline was successful
-        if (!result.succeeded()) {
-            // The pipeline failed so notify the user and quite
-            System.out.println("The pipeline failed!");
-            return 1;
-        }
-
-        // The pipeline was successful so notify the user
-        System.out.println("The pipeline was successful!");
+        
+        // TODO: Start adding your pipeline here
 
         // Print the results to the user. In map/reduce jobs this is not normally done since results can be
         // very large (GB, TB, or even PB in size), but for lab purposes it is helpful to easily see the results and the data set
