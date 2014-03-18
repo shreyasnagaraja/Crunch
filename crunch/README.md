@@ -26,7 +26,13 @@ Then navigate to the `crunch` project,
 
 ### Write a Pipeline
 
-TODO
+Before we starting writing our pipeline make sure you take a look at the crunch [doc](http://crunch.apache.org/) and 
+[javadoc](http://crunch.apache.org/apidocs/0.8.2/). You will likely need these to help you complete your pipeline.
+
+We have provided a stubbed pipeline class for you to start with here `src/main/java/com/cerner/training/crunch/CommonFriendsPipeline.java`. 
+This should provide you with everything you need but the crunch pipeline and processing.
+
+Once you think you have the pipeline complete, feel free to try building and testing the pipeline.
 
 ### Building and Testing the Project
 
@@ -118,7 +124,10 @@ Here we leave the implementation up to you.
 
 #### Writing the Friend Recommendation Pipeline
 
-TODO
+Again we have provided a stubbed pipeline class for you to start with at 
+`src/main/java/com/cerner/training/crunch/extras/FriendRecommendationPipeline.java`.
+
+Once you think you have completed the pipeline feel free to move onto building and testing the project.
 
 #### Building and Testing the Project
 
