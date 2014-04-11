@@ -48,6 +48,10 @@ Completing the labs is not necessary but participants can feel free to do so if 
 
 ### Device Setup
 
+The Udacity and Big Data University documentation will include any instructions on how to setup your device to complete their labs.  Please follow those instructions as you attempt the pre-requisites before the class begins.  The VM we use for class will differ from the pre-reqs as this will utilize an updated version of the cluster.
+
+During the actual course you will also be completing labs over the material covered.  Complete the following instructions prior to arriving at the class.
+
 In order to complete either lab the following software must be installed,
 
  * [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
