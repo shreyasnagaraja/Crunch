@@ -170,7 +170,7 @@ Once you feel that you understand the implementation lets move on to building th
 The project uses Maven for its build engine. Go back to your terminal and run the following command in the 
 project directory,
 
-    mvn clean package
+    mvn clean install
 
 This should build the Java jar used to run the map/reduce job. Once this is complete you can find this jar 
 at `target/hadoop-map-reduce-101-1.0-SNAPSHOT.jar`. 
