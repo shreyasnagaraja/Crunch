@@ -24,6 +24,33 @@ Then navigate to the `crunch` project,
 
     cd mapreduce-101/crunch
 
+### Setup the Environment
+
+Again for this lab we will be using Eclipse to view and modify the project. Eclipse is already installed in the
+VM but there is still some setup to get it to understand our Maven project.
+
+First we need to generate the Eclipse files required to import the project. So run the following command 
+in the `crunch/hadoop` directory,
+
+    mvn eclipse:eclipse
+
+Next open Eclipse (if you haven't already). Then go to `File -> Import` and select `Existing Projects into Workspace`. 
+In this dialog box find the `mapreduce-101/hadoop` directory. This should show that it will import a project called 
+`hadoop-map-reduce-101`. Select `Finish` to import the project.
+
+If you already added the `M2_REPO` environment variable from the last lab you can skip this step and your environment 
+should be setup.
+
+If for some reason you don't have the `M2_REPO` setup follow these instructions.
+
+Although we imported the project Eclipse will not be able to find all of our dependencies so we need to tell it where 
+to find our local Maven repo. Select the `crunch-101` project and go to `Project -> Properties`. From there 
+select `Java Build Path -> Add Variable`. In this box select `Configure Variables -> New`. The name of the 
+variable is `M2_REPO` and the value should be `/home/training/.m2/repository`. Once you have added this variable
+Eclipse will ask if you want to rebuild so click `Yes`.
+
+Your environment should now be setup.
+
 ### Write a Pipeline
 
 Before we starting writing our pipeline make sure you take a look at the crunch [doc](http://crunch.apache.org/) and 
