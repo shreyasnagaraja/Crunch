@@ -29,12 +29,7 @@ Then navigate to the `crunch` project,
 Again for this lab we will be using Eclipse to view and modify the project. Eclipse is already installed in the
 VM but there is still some setup to get it to understand our Maven project.
 
-First we need to generate the Eclipse files required to import the project. So run the following command 
-in the `crunch/hadoop` directory,
-
-    mvn eclipse:eclipse
-
-Next open Eclipse (if you haven't already). Then go to `File -> Import` and select `Existing Projects into Workspace`. 
+First open Eclipse (if you haven't already). Then go to `File -> Import` and select `Existing Projects into Workspace`. 
 In this dialog box find the `mapreduce-101/hadoop` directory. This should show that it will import a project called 
 `hadoop-map-reduce-101`. Select `Finish` to import the project.
 
