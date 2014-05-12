@@ -12,9 +12,14 @@ Lab
 For this lab we are going to use the same 'Friends in Common' problem that we saw in the 
 [refresher lab](../hadoop/README.md).
 
-If you haven't done so already, clone the project.
+The pipeline should follow the same algorithm we used in the map/reduce job to calculate the friends in common and 
+look like this,
+
+![Friends in Common Pipeline](assets/friends_in_common_pipeline.png?raw=true)
 
 ### Clone the Project
+
+If you haven't done so already, clone the project.
 
 Open a terminal and clone the project using git.
 
