@@ -54,21 +54,23 @@ During the actual course you will also be completing labs over the material cove
 
 In order to complete either lab the following software must be installed,
 
+ * [Git](http://git-scm.com/book/en/Getting-Started-Installing-Git)
  * [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
+ * [Vagrant](http://www.vagrantup.com/downloads.html)
 
-Once the software has been installed download the following [file](http://repo.release.cerner.corp/nexus/content/repositories/vagrant/com/cerner/virtualbox/cloudera-training-vm-4.2.1/1.0.0/cloudera-training-vm-4.2.1-1.0.0-virtualbox.zip).
+Once you have installed the above software, open a terminal or command line and do the following,
 
-Once the file has finished downloading,
+    git clone http://github.cerner.com/CDH/mapreduce-101.git
+    cd mapreduce-101
+    vagrant up
 
- * Unzip the archive. Note that on Windows machines you may need to use 7-zip or WinZip, due to a bug in Windows' built-in unzip program.
- * Launch VirtualBox
- * Create a new machine. Specify that it's a Linux -- RedHat 64-bit machine
- * Allocate at least 1024MB of RAM to the machine (more is better)
- * Specify that you'll use an existing virtual hard drive file, and navigate to the Cloudera-Training-VM-4.2.1.p.vmdk file which you unzipped above
+These commands will clone the `mapreduce-101` repository onto your local machine. Then you will issue the `vagrant up` command 
+which will bring up the VM.
 
-You should now be able to create and launch the virtual machine.
+**NOTE** : It will take several minutes (~10m) for the whole process to finish and for all services to start up on VM.
 
-**NOTE** : It will take several minutes to start up the first time. Subsequent startups will be much faster.
+In addition the `mapreduce-101` repository on your host machine will be synced with your VM so changes made in either will 
+be visible in the other.
 
 ## Agenda
 
