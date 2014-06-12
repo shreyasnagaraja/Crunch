@@ -58,8 +58,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Builds out the eclipse files for both hadoop and crunch projects while also preping maven by
   # retrieving all the necessary dependencies to build the project
-  config.vm.provision "shell", inline: "cd /home/cloudera/mapreduce-101/hadoop ; mvn clean eclipse:eclipse install"
-  config.vm.provision "shell", inline: "cd /home/cloudera/mapreduce-101/crunch ; mvn clean eclipse:eclipse"
-
+  config.vm.provision "shell", inline: "su - cloudera -c 'cd /home/cloudera/mapreduce-101/hadoop ; mvn clean eclipse:eclipse install'"
+  config.vm.provision "shell", inline: "su - cloudera -c 'cd /home/cloudera/mapreduce-101/crunch ; mvn clean eclipse:eclipse install'"
+  
 end
 

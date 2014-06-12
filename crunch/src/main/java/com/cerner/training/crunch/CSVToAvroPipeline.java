@@ -2,6 +2,7 @@ package com.cerner.training.crunch;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.avro.file.DataFileReader;
@@ -11,17 +12,13 @@ import org.apache.avro.generic.GenericDatumReader;
 import org.apache.avro.generic.GenericRecord;
 import org.apache.avro.io.DatumReader;
 import org.apache.avro.mapred.FsInput;
+import org.apache.commons.lang.StringUtils;
 import org.apache.crunch.PCollection;
-import org.apache.crunch.PGroupedTable;
-import org.apache.crunch.PTable;
-import org.apache.crunch.Pair;
 import org.apache.crunch.Pipeline;
 import org.apache.crunch.PipelineResult;
-import org.apache.crunch.Source;
 import org.apache.crunch.impl.mr.MRPipeline;
 import org.apache.crunch.io.From;
 import org.apache.crunch.io.To;
-import org.apache.crunch.types.PType;
 import org.apache.crunch.types.avro.Avros;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
@@ -36,10 +33,9 @@ import com.cerner.training.Person;
 import com.cerner.training.PersonPair;
 
 /**
- * This is the class responsible for building and running the our Crunch pipeline used to calculate common friends between
- * {@link Person people}. When complete the results will be in the 'friends' directory
+ * This class is responsible for building and running the the Crunch pipeline used to transform our CSV data into Avro.
  */
-public class CommonFriendsPipeline extends Configured implements Tool {
+public class CSVToAvroPipeline extends Configured implements Tool {
 
     /**
      * Runs the map/reduce job
@@ -52,9 +48,9 @@ public class CommonFriendsPipeline extends Configured implements Tool {
     public static void main(String[] args) throws Exception {
         // Here we use hadoop's ToolRunner to give us generic hadoop options like -conf and automatically load hadoop config files
         // on the classpath
-        System.exit(ToolRunner.run(new CommonFriendsPipeline(), args));
+        System.exit(ToolRunner.run(new CSVToAvroPipeline(), args));
     }
-
+    
     public int run(String[] args) throws Exception {
         // Verify that 1 argument was provided
         if (args.length != 1) {
@@ -80,7 +76,7 @@ public class CommonFriendsPipeline extends Configured implements Tool {
         }
 
         // This is the directory we will use for the output of the map/reduce job
-        Path outputDirectory = new Path("friends");
+        Path outputDirectory = new Path("avro");
 
         // Ensure the output directory does not exist so there are no problems with the map/reduce job writes to this directory
         if (fs.exists(outputDirectory)) {
@@ -91,19 +87,19 @@ public class CommonFriendsPipeline extends Configured implements Tool {
                 return 1;
             }
         }
-
+        
         // TODO: Start implementing your pipeline here
         
         // Print the results to the user. In map/reduce jobs this is not normally done since results can be
         // very large (GB, TB, or even PB in size), but for lab purposes it is helpful to easily see the results and the data set
-        // should be small (5 records or PersonPair objects)
+        // should be small (5 records or Person objects)
         printResults(fs, outputDirectory);
-
+        
         return 0;
     }
 
     /**
-     * Prints the {@link PersonPair} avro file in the output directory
+     * Prints the {@link Person} avro file in the output directory
      * 
      * @param fs
      *            the file system object to use to read the output data
@@ -134,9 +130,8 @@ public class CommonFriendsPipeline extends Configured implements Tool {
             FileReader<GenericRecord> fileReader = DataFileReader.openReader(input, reader);
 
             for (GenericRecord datum : fileReader) {
-                System.out.println("The friends [" + datum.get("personName1") + "] and [" + datum.get("personName2")
-                        + "] have the following friends in common ...");
-                System.out.println("  " + datum.get("commonFriends"));
+                System.out.println("Person [" + datum.get("name") + "] has friends " + 
+                        datum.get("friends"));
             }
         }
 
