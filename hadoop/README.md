@@ -140,14 +140,6 @@ First open Eclipse (if you haven't already). Then go to `File -> Import` and sel
 In this dialog box find the `mapreduce-101/hadoop` directory. This should show that it will import a project called 
 `hadoop-map-reduce-101`. Select `Finish` to import the project.
 
-Although we imported the project Eclipse will not be able to find all of our dependencies so we need to tell it where 
-to find our local Maven repo. Select the `hadoop-map-reduce-101` project and go to `Project -> Properties`. From there 
-select `Java Build Path -> Add Variable`. In this box select `Configure Variables -> New`. The name of the 
-variable is `M2_REPO` and the value should be `/home/training/.m2/repository`. Once you have added this variable
-Eclipse will ask if you want to rebuild so click `Yes`.
-
-Your environment should now be setup.
-
 ### Look Over the Implementation
 
 Now lets start by taking a look at the implementation of this job. The code contains numerous comments which should 

@@ -6,8 +6,94 @@ The purpose of this lab is to :
  * Learn the Crunch API
  * Build and run a Crunch pipeline
 
-Lab
----
+This lab will be guided by [this presentation](https://docs.google.com/presentation/d/1GpXNQjrRkS0WDYod-5HWUfIsFcXMDtEbrWGxh1G8i6Q/edit#slide=id.g3505c6015_0217).
+
+Setup
+-----
+
+Again for this lab we will be using Eclipse to view and modify the project. Eclipse is already installed in the
+VM but there is still some setup to get it to understand our Maven project.
+
+First open Eclipse (if you haven't already). Then go to `File -> Import` and select `Existing Projects into Workspace`. 
+In this dialog box find the `mapreduce-101/crunch` directory. This should show that it will import a project called 
+`crunch-101`. Select `Finish` to import the project.
+
+Lab 1 - Basics
+--------------
+
+For this lab we are given the task of migrating our raw CSV data over into Avro format. The data in question 
+is the same friend data we saw in the Hadoop Refresher Lab. The CSV data will have a format like this,
+
+    [PERSON],[FRIEND_1],[FRIEND_2],...,[FRIEND_N]
+
+While our Avro model will look like this,
+
+    record Person{
+        string name;
+        array<string> friends;
+    }
+
+Putting this into Crunch pipeline should look like this,
+
+    Source[CSV] -> DoFn[Parse] -> Target[Avro]
+
+### Write the Pipeline
+
+Before we starting writing our pipeline make sure you take a look at the crunch [doc](http://crunch.apache.org/) and 
+[javadoc](http://crunch.apache.org/apidocs/0.8.2/). You will likely need these to help you complete your pipeline.
+
+We have provided a stubbed pipeline class for you to start with here `src/main/java/com/cerner/training/crunch/CSVToAvroPipeline.java`. 
+This should provide you with everything you need but the crunch pipeline and processing.
+
+Once you think you have the pipeline complete, feel free to try building and testing the pipeline.
+
+### Building and Testing the Project
+
+From within the `crunch` directory in the mapreduce-101 repository run the following command
+to build the project,
+
+    mvn clean install
+
+This should build the Java jar used to run the map/reduce job. Once this is complete you can 
+find this jar at `target/crunch-101-1.0-SNAPSHOT.jar`.
+
+Just like before, building the project will also generate some test data to play with at 
+`target/people.csv`.
+
+Copy this data over to HDFS,
+
+    hdfs dfs -copyFromLocal target/people.csv people.csv
+
+Then we can run the Crunch pipeline using the following command,
+
+    hadoop jar target/crunch-101-1.0-SNAPSHOT.jar com.cerner.training.crunch.CSVToAvroPipeline people.csv
+
+This should kick off the pipeline and you should see output that looks like this,
+
+    2014-03-10 14:14:07,016 INFO org.apache.crunch.io.impl.FileTargetImpl: Will write output files to new path: friends
+    2014-03-10 14:14:07,415 INFO org.apache.crunch.impl.mr.collect.PGroupedTableImpl: Setting num reduce tasks to 1
+    2014-03-10 14:14:07,514 WARN org.apache.hadoop.mapred.JobClient: Use GenericOptionsParser for parsing the arguments. Applications should implement Tool for the same.
+    2014-03-10 14:14:07,960 WARN org.apache.hadoop.conf.Configuration: dfs.block.size is deprecated. Instead, use dfs.blocksize
+    2014-03-10 14:14:07,965 INFO org.apache.hadoop.mapreduce.lib.input.FileInputFormat: Total input paths to process : 1
+    2014-03-10 14:14:07,988 INFO com.hadoop.compression.lzo.GPLNativeCodeLoader: Loaded native gpl library
+    2014-03-10 14:14:07,992 INFO com.hadoop.compression.lzo.LzoCodec: Successfully loaded & initialized native-lzo library [hadoop-lzo rev c7d54fffe5a853c437ee23413ba71fc6af23c91d]
+    2014-03-10 14:14:07,992 INFO org.apache.hadoop.io.compress.LzoCodec: Bridging org.apache.hadoop.io.compress.LzoCodec to com.hadoop.compression.lzo.LzoCodec.
+    2014-03-10 14:14:08,439 INFO org.apache.crunch.hadoop.mapreduce.lib.jobcontrol.CrunchControlledJob: Running job "com.cerner.training.crunch.CommonFriendsPipeline: Avro(people.avro)+S0+GBK+S1+Avro(friends) (1/1)"
+    Person [loki] has friends [thor]
+    Person [captain america] has friends [thor, hulk]
+    Person [iron man] has friends [thor, hulk]
+    Person [hulk] has friends [thor, iron man, captain america]
+    Person [thor] has friends [loki, hulk, captain america, iron man]
+
+If you see any errors use the job tracker's logs to help debug your pipeline.
+
+**NOTE** : Normally you would test your Crunch pipeline by writing unit and integration tests but we test our
+pipeline by running it on this local cluster for test purposes.
+
+If you have completed this assignment you can move onto the next assignment.
+
+Lab 2 - Friends in Common
+-------------------------
 
 For this lab we are going to use the same 'Friends in Common' problem that we saw in the 
 [refresher lab](../hadoop/README.md).
@@ -16,40 +102,6 @@ The pipeline should follow the same algorithm we used in the map/reduce job to c
 look like this,
 
 ![Friends in Common Pipeline](assets/friends_in_common_pipeline.png?raw=true)
-
-### Clone the Project
-
-If you haven't done so already, clone the project.
-
-Open a terminal and clone the project using git.
-
-    git clone http://github.cerner.com/CDH/mapreduce-101.git
-
-Then navigate to the `crunch` project,
-
-    cd mapreduce-101/crunch
-
-### Setup the Environment
-
-Again for this lab we will be using Eclipse to view and modify the project. Eclipse is already installed in the
-VM but there is still some setup to get it to understand our Maven project.
-
-First open Eclipse (if you haven't already). Then go to `File -> Import` and select `Existing Projects into Workspace`. 
-In this dialog box find the `mapreduce-101/hadoop` directory. This should show that it will import a project called 
-`hadoop-map-reduce-101`. Select `Finish` to import the project.
-
-If you already added the `M2_REPO` environment variable from the last lab you can skip this step and your environment 
-should be setup.
-
-If for some reason you don't have the `M2_REPO` setup follow these instructions.
-
-Although we imported the project Eclipse will not be able to find all of our dependencies so we need to tell it where 
-to find our local Maven repo. Select the `crunch-101` project and go to `Project -> Properties`. From there 
-select `Java Build Path -> Add Variable`. In this box select `Configure Variables -> New`. The name of the 
-variable is `M2_REPO` and the value should be `/home/training/.m2/repository`. Once you have added this variable
-Eclipse will ask if you want to rebuild so click `Yes`.
-
-Your environment should now be setup.
 
 ### Write a Pipeline
 
@@ -71,17 +123,10 @@ to build the project,
 This should build the Java jar used to run the map/reduce job. Once this is complete you can 
 find this jar at `target/crunch-101-1.0-SNAPSHOT.jar`.
 
-Just like before, building the project will also generate some test data to play with at 
-`target/people.avro`. This is the same data as before and is provided in case the original 
-data is lost.
+We are going to use the data generated by the last lab as the input for this pipeline. We can run the 
+Crunch pipeline using the following command,
 
-If you did remove the old data copy this data over to HDFS,
-
-    hdfs dfs -copyFromLocal target/people.avro people.avro
-
-Then we can run the Crunch pipeline using the following command,
-
-    hadoop jar target/crunch-101-1.0-SNAPSHOT.jar com.cerner.training.crunch.CommonFriendsPipeline people.avro
+    hadoop jar target/crunch-101-1.0-SNAPSHOT.jar com.cerner.training.crunch.CommonFriendsPipeline avro
 
 This should kick off the pipeline and you should see output that looks like this,
 
@@ -94,7 +139,6 @@ This should kick off the pipeline and you should see output that looks like this
     2014-03-10 14:14:07,992 INFO com.hadoop.compression.lzo.LzoCodec: Successfully loaded & initialized native-lzo library [hadoop-lzo rev c7d54fffe5a853c437ee23413ba71fc6af23c91d]
     2014-03-10 14:14:07,992 INFO org.apache.hadoop.io.compress.LzoCodec: Bridging org.apache.hadoop.io.compress.LzoCodec to com.hadoop.compression.lzo.LzoCodec.
     2014-03-10 14:14:08,439 INFO org.apache.crunch.hadoop.mapreduce.lib.jobcontrol.CrunchControlledJob: Running job "com.cerner.training.crunch.CommonFriendsPipeline: Avro(people.avro)+S0+GBK+S1+Avro(friends) (1/1)"
-    The pipeline was successful!
     The friends [captain america] and [hulk] have the following friends in common ...
       [thor]
     The friends [captain america] and [thor] have the following friends in common ...

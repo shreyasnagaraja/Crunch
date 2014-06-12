@@ -2,14 +2,11 @@ package com.cerner.training.internal;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.apache.avro.file.DataFileWriter;
-import org.apache.avro.io.DatumWriter;
-import org.apache.avro.specific.SpecificDatumWriter;
 
 import com.cerner.training.Person;
 
@@ -24,6 +21,7 @@ public class GeneratedData {
     public static Map<String, Person> people = new HashMap<String, Person>();
 
     static {
+        // A person cannot a comma in their name otherwise CSV parsing would fail
         areFriends("thor", "loki");
         areFriends("thor", "hulk");
         areFriends("thor", "captain america");
@@ -41,35 +39,47 @@ public class GeneratedData {
      *             if there is an issue writing the files
      */
     public static void main(String[] args) throws Exception {
-        write(people.values(), new File("target/people.avro"));
+        write(people.values(), new File("target/people.csv"));
     }
 
     /**
-     * Writes the given collection of {@link Person} objects to the given {@link File}
+     * Writes the given collection of {@link Person} objects to the given {@link File} in CSV format
      * 
      * @param people
      *            the collection of {@link Person} objects
      * @param file
-     *            the {@link File} to write the avro data to
+     *            the {@link File} to write the csv data to
      * @throws IOException
      *             if there is an issue writing the file
      */
     static void write(Collection<Person> people, File file) throws IOException {
-        DatumWriter<Person> writer = new SpecificDatumWriter<Person>(Person.getClassSchema());
-        DataFileWriter<Person> dataFileWriter = new DataFileWriter<Person>(writer);
+        PrintWriter writer = new PrintWriter(file, "UTF-8");
         
-        try {
-            dataFileWriter.create(Person.SCHEMA$, file);
-    
-            for (Person person : people) {
-                dataFileWriter.append(person);
+        // CSV format is [NAME],[FRIEND_1],[FRIEND_2],...,[FRIEND_N]
+        
+        for(Person person : people) {
+            StringBuilder builder = new StringBuilder();
+            
+            builder.append(person.getName());
+            
+            if(!person.getFriends().isEmpty())
+                builder.append(",");
+            
+            boolean first = true;
+            for(String friend : person.getFriends()) {
+                if(!first) {
+                    builder.append(",");
+                }
+                else{
+                	first = false;
+                }
+                builder.append(friend);
             }
-            dataFileWriter.flush();
-        } finally {
-            dataFileWriter.close();
+            
+            writer.println(builder.toString());
         }
-
-       
+        
+        writer.close();
     }
 
     /**
