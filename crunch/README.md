@@ -1,12 +1,12 @@
-Crunch Processing Lab
+Crunch Presentations & Processing Lab
 =====================
 
-The purpose of this lab is to :
+The purpose of this activity is to :
 
  * Learn the Crunch API
  * Build and run a Crunch pipeline
 
-This lab will be guided by [this presentation](https://docs.google.com/presentation/d/1GpXNQjrRkS0WDYod-5HWUfIsFcXMDtEbrWGxh1G8i6Q/edit#slide=id.g3505c6015_0217).
+This presentation & lab will be guided by [this presentation](https://docs.google.com/presentation/d/1GpXNQjrRkS0WDYod-5HWUfIsFcXMDtEbrWGxh1G8i6Q/edit#slide=id.g3505c6015_0217).
 
 Setup
 -----
