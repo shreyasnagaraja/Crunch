@@ -76,5 +76,11 @@ be visible in the other.
 
 * [Hadoop & MapReduce Refresher presentation](https://docs.google.com/presentation/d/1sGhf_nZPlfWHjNPFSgOwKf208_67oC21ZeORNQXVo88/edit#slide=id.p)
 * [Hadoop & MapReduce Refresher lab](hadoop/README.md)
+* [Crunch Presentation & Processing Lab](crunch/README.md)
+
+### Archive
+
+These are some of the older presentations that we've used in the past that can be reviewed stand alone if desired.
+
 * [Introduction to Processing with Crunch](https://docs.google.com/presentation/d/1TnLU5ZaigrR7R4Fkj55zWfFJ1Xcl9FvKaL4h0B9a6-o/edit?usp=sharing)
-* [Crunch Processing Lab](crunch/README.md)
+
