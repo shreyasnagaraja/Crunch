@@ -74,7 +74,7 @@ be visible in the other.
 
 ## Agenda
 
-* [Hadoop & MapReduce Refresher presentation](https://docs.google.com/presentation/d/1sGhf_nZPlfWHjNPFSgOwKf208_67oC21ZeORNQXVo88/edit#slide=id.p)
+* [Hadoop & MapReduce Refresher presentation](https://docs.google.com/presentation/d/16oeJUEYxxwMDGQhHPTqJ0Pxlv5YMlRVlOGDVDrq3HtM)
 * [Hadoop & MapReduce Refresher lab](hadoop/README.md)
 * [Crunch Presentation & Processing Lab](crunch/README.md)
 
