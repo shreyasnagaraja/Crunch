@@ -72,9 +72,9 @@ which will bring up the VM.
 In addition the `mapreduce-101` repository on your host machine will be synced with your VM so changes made in either will 
 be visible in the other.
 
-## Agenda
+## Links
 
-* [Hadoop & MapReduce Refresher presentation](https://docs.google.com/presentation/d/16oeJUEYxxwMDGQhHPTqJ0Pxlv5YMlRVlOGDVDrq3HtM)
+* [Map/Reduce presentation](https://docs.google.com/presentation/d/1Ljnyb0l88NCSF1GrWhPwnhXr_oZxdRM7cSMpZ-E2O28)
 * [Hadoop & MapReduce Refresher lab](hadoop/README.md)
 * [Crunch Presentation & Processing Lab](crunch/README.md)
 
