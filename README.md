@@ -55,7 +55,7 @@ During the actual course you will also be completing labs over the material cove
 In order to complete either lab the following software must be installed,
 
  * [Git](http://git-scm.com/book/en/Getting-Started-Installing-Git)
- * [VirtualBox](https://www.virtualbox.org/wiki/Downloads) Do not install version 4.2.14 as there are known compatibility issues.
+ * [VirtualBox](https://www.virtualbox.org/wiki/Downloads) Check this [documentation](https://wiki.ucern.com/display/OPSINFRA/Enterprise+Chef+SDK) for information on versions.
  * [Vagrant](http://www.vagrantup.com/downloads.html)
 
 Once you have installed the above software, open a terminal or command line and do the following,
