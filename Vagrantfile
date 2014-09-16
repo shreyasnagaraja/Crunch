@@ -54,6 +54,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     v.memory = 2048
     v.cpus = 2
 
+    # Enables shared clipboard
+    v.customize ['modifyvm', :id, '--clipboard', 'bidirectional']
+
   end
 
   # Builds out the eclipse files for both hadoop and crunch projects while also preping maven by
