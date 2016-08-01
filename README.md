@@ -35,7 +35,7 @@ about Python.
 ### Big Data University
 
 To compensate Cloudera and Udacity's focus on Python, it is also suggested participants take the Big Data University's
-[Introduction to MapReduce Programming](http://bigdatauniversity.com/bdu-wp/bdu-course/introduction-to-mapreduce-programming/).  For this course please audit
+[Introduction to MapReduce Programming](https://archive.bigdatauniversity.com/courses/introduction-to-mapreduce-programming/). For this course please audit
 the following sections:
 
 * Lesson 1: Introduction to MapReduce
