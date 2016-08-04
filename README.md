@@ -1,4 +1,4 @@
-# MAPREDUCE-101 
+# MAPREDUCE-101
 
 
 ## Introduction
@@ -14,7 +14,7 @@ The purpose of this project is to help individuals with the following:
 * Understand the basic concepts of Apache Crunch for composing MapReduce jobs
 * Write and execute a runnable crunch job that implements a full pipeline.
 
-The class builds upon tutorials that are already available to focus on concepts specific to Cerner and how we solve Big Data processing problems.  The **Prerequisites** were 
+The class builds upon tutorials that are already available to focus on concepts specific to Cerner and how we solve Big Data processing problems.  The **Prerequisites** were
 selected to introduce participants to Hadoop & MapReduce.  Please complete the **Prerequisites** prior to arriving to class.  The content of the course will build upon concepts presented in the **Prerequisites** and participants will be lost or left behind if they have not adequately prepared.
 
 ## Prerequisites
@@ -25,7 +25,7 @@ you are expected to perform.
 
 ### Udacity & Cloudera
 
-Cloudera offers the first four sections of its training for free on [Udacity](http://www.cloudera.com/content/cloudera/en/training/courses/udacity/mapreduce.html).
+Cloudera offers the first four sections of its training for free on [Udacity](https://www.udacity.com/course/intro-to-hadoop-and-mapreduce--ud617).
 All of the sections are useful and should be reviewed by participants.  Participants can pay for the additional sections (at their own expense) but it is not necessary.
 
 The Udacity training focuses on Hadoop's Streaming API and Python for interacting with the cluster.  Currently Cerner typically does not use the Streaming
@@ -64,12 +64,12 @@ Once you have installed the above software, open a terminal or command line and 
     cd mapreduce-101
     vagrant up
 
-These commands will clone the `mapreduce-101` repository onto your local machine. Then you will issue the `vagrant up` command 
+These commands will clone the `mapreduce-101` repository onto your local machine. Then you will issue the `vagrant up` command
 which will bring up the VM.
 
 **NOTE** : It will take several minutes (~10m) for the whole process to finish and for all services to start up on VM.
 
-In addition the `mapreduce-101` repository on your host machine will be synced with your VM so changes made in either will 
+In addition the `mapreduce-101` repository on your host machine will be synced with your VM so changes made in either will
 be visible in the other.
 
 ## Links
@@ -83,4 +83,3 @@ be visible in the other.
 These are some of the older presentations that we've used in the past that can be reviewed stand alone if desired.
 
 * [Introduction to Processing with Crunch](https://docs.google.com/presentation/d/1TnLU5ZaigrR7R4Fkj55zWfFJ1Xcl9FvKaL4h0B9a6-o/edit?usp=sharing)
-
