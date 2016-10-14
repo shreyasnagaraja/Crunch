@@ -32,23 +32,22 @@ The Udacity training focuses on Hadoop's Streaming API and Python for interactin
 API or Python for MapReduce processing.  Participants should feel free to attempt the lessons and coding operations but should not be blocked by a lack of knowledge
 about Python.
 
-### Big Data University
+These videos are also available on [Youtube as the following playlist](https://www.youtube.com/watch?v=DEQNknALf_8&list=PLAwxTw4SYaPkXJ6LAV96gH8yxIfGaN3H-).
 
-To compensate Cloudera and Udacity's focus on Python, it is also suggested participants take the Big Data University's
-[Introduction to MapReduce Programming](https://archive.bigdatauniversity.com/courses/introduction-to-mapreduce-programming/). For this course please audit
-the following sections:
 
-* Lesson 1: Introduction to MapReduce
-* Lesson 2: MapReduce Programming
+### YouTube Videos
 
-Do not attempt *Lesson 3: MapReduce Programming Using BigInsights* as BigInsights is not currently used at Cerner and not relevant to general Hadoop & MapReduce knowledge.
-The purpose of Big Data University's course is to introduce participants to the Java APIs that developers will typically be using at Cerner.
+There are a number of great Youtube videos and playlists that also give a great introduction to the basics of the HDFS architecture and MapReduce.
 
-Completing the labs is not necessary but participants can feel free to do so if they choose.
+* [Hadoop - Just the Basics for Big Data Rookies](https://www.youtube.com/watch?v=xYnS9PQRXTg)
+* [Introduction to MapReduce](https://www.youtube.com/watch?v=1rKnf3MmSJA&list=PLkp40uss1kSJ5TL379zpHnYgnXimMuR2w)
+
+Watching these videos ahead of class will give you a good introduction to the basics we will review the basics in class but preparing ahead of time will allow us to go deeper into the subject matter or allow you to come with more detailed questions.
+
 
 ### Device Setup
 
-The Udacity and Big Data University documentation will include any instructions on how to setup your device to complete their labs.  Please follow those instructions as you attempt the pre-requisites before the class begins.  The VM we use for class will differ from the pre-reqs as this will utilize an updated version of the cluster.
+The Udacity documentation will include any instructions on how to setup your device to complete their labs.  Please follow those instructions as you attempt the pre-requisites before the class begins.  The VM we use for class will differ from the pre-reqs as this will utilize an updated version of the cluster.
 
 During the actual course you will also be completing labs over the material covered.  Complete the following instructions prior to arriving at the class.
 
