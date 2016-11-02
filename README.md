@@ -55,7 +55,7 @@ In order to complete either lab the following software must be installed,
 
  * [Git](http://git-scm.com/book/en/Getting-Started-Installing-Git)
  * [VirtualBox](https://www.virtualbox.org/wiki/Downloads) Check this [documentation](https://wiki.ucern.com/display/OPSINFRA/Enterprise+Chef+SDK) for information on versions.
- * [Vagrant](http://www.vagrantup.com/downloads.html)
+ * [Vagrant](http://www.vagrantup.com/downloads.html) (> 1.8.5)
 
 Once you have installed the above software, open a terminal or command line and do the following,
 
