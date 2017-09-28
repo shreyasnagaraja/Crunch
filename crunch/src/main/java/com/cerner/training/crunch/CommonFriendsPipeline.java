@@ -36,6 +36,7 @@ import com.cerner.training.Person;
 import com.cerner.training.PersonPair;
 
 /**
+ * I am modifying it
  * This is the class responsible for building and running the our Crunch pipeline used to calculate common friends between
  * {@link Person people}. When complete the results will be in the 'friends' directory
  */
@@ -92,7 +93,73 @@ public class CommonFriendsPipeline extends Configured implements Tool {
             }
         }
 
-        // TODO: Start implementing your pipeline here
+        // Create pipeline object
+
+        Pipeline pipeline = new MRPipeline(getClass(), conf);
+
+
+
+        // Read Avro data
+
+        PCollection<Person> people = pipeline.read(From.avroFile(inputPath, Person.class));
+
+
+
+        // Table of Friends
+
+        PTable<Pair<String, String>, Person> peopleTable = people.parallelDo(
+
+                new PeopleToFriends(),
+
+                Avros.tableOf(
+
+                        Avros.pairs(Avros.strings(), Avros.strings()),
+
+                        Avros.records(Person.class)
+
+                )
+
+        );
+
+
+
+        // Group Friends
+
+        PGroupedTable<Pair<String, String>, Person> groupedPeopleTable = peopleTable.groupByKey();
+
+
+
+        // Calculate Common Friends
+
+        PCollection<PersonPair> pairs = groupedPeopleTable.parallelDo(
+
+                new ComputeCommonFriends(),
+
+                Avros.records(PersonPair.class)
+
+        );
+
+
+
+        // Write Avro
+
+        pipeline.write(pairs, To.avroFile(outputDirectory));
+
+
+
+        // Pipeline Done
+
+        PipelineResult result = pipeline.done();
+
+
+
+        if (!result.succeeded()) {
+
+            System.out.println("Pipeline failed");
+
+            return 1;
+
+        }
         
         // Print the results to the user. In map/reduce jobs this is not normally done since results can be
         // very large (GB, TB, or even PB in size), but for lab purposes it is helpful to easily see the results and the data set

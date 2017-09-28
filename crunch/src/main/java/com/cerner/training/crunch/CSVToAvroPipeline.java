@@ -65,7 +65,7 @@ public class CSVToAvroPipeline extends Configured implements Tool {
         // Retrieve the Configuration object that ToolRunner built for us
         Configuration conf = getConf();
 
-        // The FileSystem.get(Configuration) method retrieves a cached FileSystem instance so we shouldn't close it
+        // The FileSystem.get(Configuration) method inoutretrieves a cached FileSystem instance so we shouldn't close it
         FileSystem fs = FileSystem.get(conf);
 
         // Verify the input path given to us exists in HDFS
@@ -88,7 +88,49 @@ public class CSVToAvroPipeline extends Configured implements Tool {
             }
         }
         
-        // TODO: Start implementing your pipeline here
+        // Create pipeline object
+
+        Pipeline pipeline = new MRPipeline(getClass(), conf);
+
+
+
+        // Read CSV
+
+        PCollection<String> csvData = pipeline.read(From.textFile(inputPath));
+
+
+
+        // Transform CSV to Avro
+
+        PCollection<Person> avroData = csvData.parallelDo(
+
+                new CSVToAvroDoFn(),
+
+                Avros.records(Person.class)
+
+        );
+
+
+
+        // Write results
+
+        pipeline.write(avroData, To.avroFile(outputDirectory));
+
+
+
+        // Pipeline done
+
+        PipelineResult result = pipeline.done();
+
+
+
+        if (!result.succeeded()) {
+
+            System.out.println("The pipeline failed");
+
+            return 1;
+
+        }
         
         // Print the results to the user. In map/reduce jobs this is not normally done since results can be
         // very large (GB, TB, or even PB in size), but for lab purposes it is helpful to easily see the results and the data set
@@ -131,7 +173,7 @@ public class CSVToAvroPipeline extends Configured implements Tool {
 
             for (GenericRecord datum : fileReader) {
                 System.out.println("Person [" + datum.get("name") + "] has friends " + 
-                        datum.get("friends"));
+                        datum.get("friends") + " number of Friends " + datum.get("numberOfFriends"));
             }
         }
 

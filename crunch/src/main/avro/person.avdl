@@ -15,6 +15,13 @@
          * An array containing the names of all the friends of this person
          */
          array<string> friends;
+         
+         /**
+         * Number of friends 
+         */
+         int numberOfFriends = 0;
+         
+         map<"Friends": array<string>> names;
      }
      
      /**
